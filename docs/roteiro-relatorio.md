@@ -64,8 +64,6 @@ O banco H2 foi configurado para persistir os dados na pasta `data` do projeto. O
 
 ## 5. Testes com Postman
 
-Inserir abaixo as capturas de tela. Em cada imagem, deixar visíveis o método HTTP, a URL, o corpo JSON quando houver, o status da resposta e o JSON retornado.
-
 ### 5.1 Cadastros
 
 - POST de Cliente.
