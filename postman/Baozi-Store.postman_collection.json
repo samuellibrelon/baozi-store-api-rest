@@ -1,0 +1,116 @@
+{
+  "info": {
+    "_postman_id": "60665e90-9816-4c62-9b25-467635100001",
+    "name": "Baozi Store - Samuel 4676351",
+    "description": "Coleção preparada para os testes e prints do trabalho de Desenvolvimento Web Back-End.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1 - Cadastros",
+      "item": [
+        {
+          "name": "POST - Criar cliente",
+          "event": [{
+            "listen": "test",
+            "script": {"exec": ["pm.test(\"Cliente criado\", () => pm.response.to.have.status(201));", "pm.collectionVariables.set(\"clienteId\", pm.response.json().id);"]}
+          }],
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"nome\": \"Samuel Librelon Pinheiro Lopes4676351\",\n  \"clienteDesde\": \"2026-08-23\"\n}"},
+            "url": "{{baseUrl}}/clientes"
+          }
+        },
+        {
+          "name": "POST - Criar produto",
+          "event": [{
+            "listen": "test",
+            "script": {"exec": ["pm.test(\"Produto criado\", () => pm.response.to.have.status(201));", "pm.collectionVariables.set(\"produtoId\", pm.response.json().id);"]}
+          }],
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"nome\": \"Baozi de carne suína\",\n  \"preco\": 12.50,\n  \"estoque\": true\n}"},
+            "url": "{{baseUrl}}/produtos"
+          }
+        },
+        {
+          "name": "POST - Criar pedido",
+          "event": [{
+            "listen": "test",
+            "script": {"exec": ["pm.test(\"Pedido criado\", () => pm.response.to.have.status(201));", "pm.collectionVariables.set(\"pedidoId\", pm.response.json().id);"]}
+          }],
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"clienteId\": {{clienteId}},\n  \"produtoId\": {{produtoId}},\n  \"quantidade\": 3\n}"},
+            "url": "{{baseUrl}}/pedidos"
+          }
+        }
+      ]
+    },
+    {
+      "name": "2 - Listagens gerais",
+      "item": [
+        {"name": "GET - Listar clientes", "request": {"method": "GET", "url": "{{baseUrl}}/clientes"}},
+        {"name": "GET - Listar produtos", "request": {"method": "GET", "url": "{{baseUrl}}/produtos"}},
+        {"name": "GET - Listar pedidos", "request": {"method": "GET", "url": "{{baseUrl}}/pedidos"}}
+      ]
+    },
+    {
+      "name": "3 - Consultas por ID",
+      "item": [
+        {"name": "GET - Consultar cliente por ID", "request": {"method": "GET", "url": "{{baseUrl}}/clientes/{{clienteId}}"}},
+        {"name": "GET - Consultar produto por ID", "request": {"method": "GET", "url": "{{baseUrl}}/produtos/{{produtoId}}"}},
+        {"name": "GET - Consultar pedido por ID", "request": {"method": "GET", "url": "{{baseUrl}}/pedidos/{{pedidoId}}"}}
+      ]
+    },
+    {
+      "name": "4 - Atualizações opcionais",
+      "item": [
+        {
+          "name": "PUT - Atualizar cliente",
+          "request": {
+            "method": "PUT",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"nome\": \"Samuel Librelon Pinheiro Lopes4676351\",\n  \"clienteDesde\": \"2026-08-23\"\n}"},
+            "url": "{{baseUrl}}/clientes/{{clienteId}}"
+          }
+        },
+        {
+          "name": "PUT - Atualizar produto",
+          "request": {
+            "method": "PUT",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"nome\": \"Baozi de carne suína\",\n  \"preco\": 12.50,\n  \"estoque\": true\n}"},
+            "url": "{{baseUrl}}/produtos/{{produtoId}}"
+          }
+        },
+        {
+          "name": "PUT - Atualizar pedido",
+          "request": {
+            "method": "PUT",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"clienteId\": {{clienteId}},\n  \"produtoId\": {{produtoId}},\n  \"quantidade\": 4\n}"},
+            "url": "{{baseUrl}}/pedidos/{{pedidoId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "5 - Exclusões (executar por último)",
+      "item": [
+        {"name": "DELETE - Apagar pedido", "request": {"method": "DELETE", "url": "{{baseUrl}}/pedidos/{{pedidoId}}"}},
+        {"name": "DELETE - Apagar produto", "request": {"method": "DELETE", "url": "{{baseUrl}}/produtos/{{produtoId}}"}},
+        {"name": "DELETE - Apagar cliente", "request": {"method": "DELETE", "url": "{{baseUrl}}/clientes/{{clienteId}}"}}
+      ]
+    }
+  ],
+  "variable": [
+    {"key": "baseUrl", "value": "http://localhost:8080"},
+    {"key": "clienteId", "value": "1"},
+    {"key": "produtoId", "value": "1"},
+    {"key": "pedidoId", "value": "1"}
+  ]
+}
